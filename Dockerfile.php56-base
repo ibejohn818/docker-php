@@ -1,0 +1,24 @@
+FROM centos:6.9
+
+# install repos
+RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm && \
+	rpm -Uvh https://centos6.iuscommunity.org/ius-release.rpm
+
+RUN yum install -y php56u php56u-common php56u-devel php56u-gd php56u-imap \
+        php56u-ldap php56u-mbstring php56u-mcrypt php56u-mssql \
+        php56u-mysql php56u-intl php56u-odbc php56u-opcache php56u-pdo \
+        php56u-pear php56u-pecl-apcu php56u-pecl-geoip php56u-pecl-xdebug \
+        php56u-pecl-imagick php56u-pecl-memcached php56u-pecl-redis \
+        php56u-pecl-mongodb php56u-soap php56u-xml php56u-fpm
+
+#COPY php-fpm.conf /etc/php-fpm.conf
+
+RUN sed -i '/daemonize /c \
+daemonize = no' /etc/php-fpm.conf
+
+RUN sed -i '/^listen /c \
+listen = 0.0.0.0:9000' /etc/php-fpm.d/www.conf
+
+RUN sed -i 's/^listen.allowed_clients/;listen.allowed_clients/' /etc/php-fpm.d/www.conf
+
+ENTRYPOINT ["php-fpm"]
