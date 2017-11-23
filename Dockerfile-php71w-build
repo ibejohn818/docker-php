@@ -1,5 +1,7 @@
 FROM ibejohn818/php:php71w-base
 
+RUN yum install -y npm
+
 #Install composer
 RUN /bin/bash -c 'curl https://getcomposer.org/download/1.5.1/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer'
 
