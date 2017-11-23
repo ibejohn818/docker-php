@@ -4,7 +4,7 @@ FROM centos:7
 RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 
-RUN yum install -y php71w php71w-common php71w-devel php71w-gd php71w-imap \
+RUN yum install -y git php71w php71w-common php71w-devel php71w-gd php71w-imap \
         php71w-ldap php71w-mbstring php71w-mcrypt \
         php71w-mysqlnd php71w-intl php71w-odbc php71w-opcache php71w-pdo \
         php71w-pear php71w-pecl-apcu php71w-pecl-geoip \
