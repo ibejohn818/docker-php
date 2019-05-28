@@ -9,4 +9,6 @@ RUN yum install -y git php71w php71w-common php71w-devel php71w-gd php71w-imap \
         php71w-mysqlnd php71w-intl php71w-odbc php71w-opcache php71w-pdo \
         php71w-pear php71w-pecl-apcu php71w-pecl-geoip \
         php71w-pecl-redis php71w-pecl-mongodb php71w-soap php71w-xml \
-        php71w-pecl-memcached php71w-pecl-imagick php71w-pecl-xdebug \
+        php71w-pecl-memcached php71w-pecl-imagick php71w-pecl-xdebug
+
+COPY ./conf/php71w/php.d/ /etc/php.d/

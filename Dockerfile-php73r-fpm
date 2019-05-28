@@ -1,0 +1,25 @@
+FROM ibejohn818/php:php73r-base
+
+RUN yum install -y php73-php-fpm
+
+RUN ln -s /etc/opt/remi/php73/php-fpm.conf /etc/php-fpm.conf && \
+        ln -s /etc/opt/remi/php73/php-fpm.d /etc/php-fpm.d && \
+        ln -s /opt/remi/php73/root/usr/sbin/php-fpm /usr/bin/php-fpm
+
+# turn off daemon mode for docker
+RUN sed -i '/daemonize /c \
+daemonize = no' /etc/php-fpm.conf
+
+
+RUN sed -i '/clear_env /c \
+clear_env = no' /etc/php-fpm.conf
+
+ #listen for all
+RUN sed -i '/^listen /c \
+listen = 0.0.0.0:9000' /etc/php-fpm.d/www.conf
+
+ #allow all
+RUN sed -i 's/^listen.allowed_clients/;listen.allowed_clients/' /etc/php-fpm.d/www.conf
+
+ #send php-fpm to the foregroud
+CMD ["php-fpm", "-F", "-R"]
